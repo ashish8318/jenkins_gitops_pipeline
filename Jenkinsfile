@@ -26,17 +26,17 @@ pipeline {
             }
         }
 
-        // stage("Prepare Workspace") {
-        //     steps {
-        //         script {
-        //             def repoDir = "gitops-repo"
-        //             bat "if not exist ${repoDir} mkdir ${repoDir}"
-        //             dir(repoDir) {
-        //                 bat "git clone ${gitRepo} ."
-        //             }
-        //         }
-        //     }
-        // }
+        stage("Prepare Workspace") {
+            steps {
+                script {
+                    def repoDir = "gitops-repo"
+                    bat "if not exist ${repoDir} mkdir ${repoDir}"
+                    dir(repoDir) {
+                        bat "git clone ${gitRepo} . || (echo Repo exists. Pulling latest && git pull origin main)"
+                    }
+                }
+            }
+        }
 
         stage('Update Deployment File') {
             steps {
@@ -54,7 +54,7 @@ pipeline {
                         git config user.email "${gitUserEmail}"
                         git config user.name "${gitUser}"
                         git add deployment.yaml
-                        git commit -m "Update deployment image to ${params.IMAGE_URI}"
+                        git diff --staged --quiet || git commit -m "Update deployment image to ${params.IMAGE_URI}"
                         """
                     }
                 }
