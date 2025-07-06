@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: 420866608360.dkr.ecr.us-east-2.amazonaws.com/jenkins-pipeline:3
+        image: Test
         ports:
         - containerPort: 5000
