@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: "Image"
+        image: Test
         ports:
         - containerPort: 5000
