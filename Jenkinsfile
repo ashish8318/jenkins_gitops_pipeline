@@ -26,17 +26,17 @@ pipeline {
             }
         }
 
-        stage("Prepare Workspace") {
-            steps {
-                script {
-                    def repoDir = "gitops-repo"
-                    bat "if not exist ${repoDir} mkdir ${repoDir}"
-                    dir(repoDir) {
-                        bat "git clone ${gitRepo} ."
-                    }
-                }
-            }
-        }
+        // stage("Prepare Workspace") {
+        //     steps {
+        //         script {
+        //             def repoDir = "gitops-repo"
+        //             bat "if not exist ${repoDir} mkdir ${repoDir}"
+        //             dir(repoDir) {
+        //                 bat "git clone ${gitRepo} ."
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Update Deployment File') {
             steps {
