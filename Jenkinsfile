@@ -42,6 +42,7 @@ pipeline {
             steps {
                 dir('gitops-repo') {
                     script {
+                        bat "git pull origin main"
                         echo "📝 Updating deployment.yaml with image: ${params.IMAGE_URI}"
 
                         def deploymentFile = readFile 'deployment.yaml'
